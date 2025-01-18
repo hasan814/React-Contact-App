@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const Contacts = ({ setContacts }) => {
   // ============ State ============
@@ -16,7 +17,12 @@ const Contacts = ({ setContacts }) => {
 
   // ============ submit Function ============
   const submitHandler = () => {
+    if (Object.values(contact).some((value) => !value.trim())) {
+      toast.error("Please enter valid Data!");
+      return;
+    }
     setContacts((contacts) => [...contacts, contact]);
+    setContact({ name: "" });
   };
 
   // ============ Rendering ============
