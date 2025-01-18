@@ -1,11 +1,15 @@
 import { MdDeleteOutline } from "react-icons/md";
 import { SiMinutemailer } from "react-icons/si";
+import { ContactContext } from "../../context/ContactProvider";
 import { FaPhoneAlt } from "react-icons/fa";
+import { useContext } from "react";
 import { v4 } from "uuid";
 
-import PropTypes from "prop-types";
+const List = () => {
+  // ============== Context =============
+  const { deleteContact, contacts } = useContext(ContactContext);
 
-const List = ({ contacts }) => {
+  // ============== Rendering =============
   return (
     <ul>
       {contacts.map((contact) => (
@@ -21,24 +25,13 @@ const List = ({ contacts }) => {
             <FaPhoneAlt />
             {contact.phone}
           </p>
-          <button>
+          <button onClick={() => deleteContact(contact.id)}>
             <MdDeleteOutline />
           </button>
         </li>
       ))}
     </ul>
   );
-};
-List.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      lastname: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-      phone: PropTypes.string.isRequired,
-    })
-  ).isRequired,
 };
 
 export default List;

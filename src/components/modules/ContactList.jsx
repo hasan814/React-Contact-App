@@ -1,7 +1,12 @@
-import PropTypes from "prop-types";
 import List from "./List";
+import { useContext } from "react";
+import { ContactContext } from "../../context/ContactProvider";
 
-const ContactList = ({ contacts }) => {
+const ContactList = () => {
+  // ============== Context =============
+  const { contacts } = useContext(ContactContext);
+
+  // ============== Rendering =============
   return (
     <div>
       <h3>Contacts List</h3>
@@ -12,18 +17,6 @@ const ContactList = ({ contacts }) => {
       )}
     </div>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      lastname: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-      phone: PropTypes.string.isRequired,
-    })
-  ).isRequired,
 };
 
 export default ContactList;

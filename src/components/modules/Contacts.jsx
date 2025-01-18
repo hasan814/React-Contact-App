@@ -1,12 +1,15 @@
+import { useContext, useState } from "react";
+import { ContactContext } from "../../context/ContactProvider";
 import { InputsList } from "../../utils/InputsList";
-import { useState } from "react";
 import { v4 } from "uuid";
 
 import InputField from "../elements/InputField";
-import PropTypes from "prop-types";
 import toast from "react-hot-toast";
 
-const Contacts = ({ setContacts }) => {
+const Contacts = () => {
+  // ============ Context ============
+  const { setContacts } = useContext(ContactContext);
+
   // ============ State ============
   const [contact, setContact] = useState({
     id: "",
@@ -67,10 +70,6 @@ const Contacts = ({ setContacts }) => {
       </div>
     </div>
   );
-};
-
-Contacts.propTypes = {
-  setContacts: PropTypes.func.isRequired,
 };
 
 export default Contacts;
