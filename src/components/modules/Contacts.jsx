@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Contacts = () => {
+const Contacts = ({ setContacts }) => {
   // ============ State ============
   const [contact, setContact] = useState({
     name: "",
@@ -16,7 +16,7 @@ const Contacts = () => {
 
   // ============ submit Function ============
   const submitHandler = () => {
-    console.log(contact);
+    setContacts((contacts) => [...contacts, contact]);
   };
 
   // ============ Rendering ============
