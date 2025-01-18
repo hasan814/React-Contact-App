@@ -14,15 +14,15 @@ const Contacts = () => {
   const [contact, setContact] = useState({
     id: "",
     name: "",
-    lastname: "",
-    email: "",
     phone: "",
+    email: "",
+    lastname: "",
   });
 
   // ============ Change Handler ============
   const changeHandler = (event) => {
     const { name, value } = event.target;
-    setContact((contact) => ({ ...contact, [name]: value }));
+    setContact((prevContact) => ({ ...prevContact, [name]: value }));
   };
 
   // ============ Submit Handler ============
@@ -51,7 +51,7 @@ const Contacts = () => {
         <form className="grid grid-cols-2 gap-4">
           {InputsList.map((field) => (
             <InputField
-              key={v4()}
+              key={field.name}
               name={field.name}
               type={field.type}
               placeholder={field.placeholder}

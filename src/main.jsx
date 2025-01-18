@@ -7,10 +7,9 @@ import App from "./App.jsx";
 import "./index.css";
 
 createRoot(document.getElementById("root")).render(
-  <ContactProvider>
-    <StrictMode>
+  <StrictMode>
+    <ContactProvider>
       <App />
-    </StrictMode>
-    ,
-  </ContactProvider>
+    </ContactProvider>
+  </StrictMode>
 );
