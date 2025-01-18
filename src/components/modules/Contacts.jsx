@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { ContactContext } from "../../context/ContactProvider";
+import { ContactContext } from "../../context/ContactContext";
 import { InputsList } from "../../utils/InputsList";
 import { v4 } from "uuid";
 

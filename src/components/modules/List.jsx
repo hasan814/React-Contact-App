@@ -1,6 +1,6 @@
 import { MdDeleteOutline } from "react-icons/md";
 import { SiMinutemailer } from "react-icons/si";
-import { ContactContext } from "../../context/ContactProvider";
+import { ContactContext } from "../../context/ContactContext";
 import { FaPhoneAlt } from "react-icons/fa";
 import { useContext } from "react";
 import { v4 } from "uuid";

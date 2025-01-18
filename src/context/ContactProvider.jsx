@@ -1,12 +1,19 @@
-import { createContext, useState } from "react";
+import { useEffect, useState } from "react";
+import { ContactContext } from "./ContactContext";
 
 import PropTypes from "prop-types";
 
-export const ContactContext = createContext();
-
 const ContactProvider = ({ children }) => {
   // ============= State ===============
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(() => {
+    const savedContacts = localStorage.getItem("contacts");
+    return savedContacts ? JSON.parse(savedContacts) : [];
+  });
+
+  // ============= Save to LocalStorage ===============
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }, [contacts]);
 
   // ============= Delete Function ===============
   const deleteContact = (id) => {
