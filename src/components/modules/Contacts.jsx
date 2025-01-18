@@ -1,4 +1,8 @@
+import { ContactList } from "../../utils/ContactList";
 import { useState } from "react";
+
+import InputField from "../elements/InputField";
+import PropTypes from "prop-types";
 import toast from "react-hot-toast";
 
 const Contacts = ({ setContacts }) => {
@@ -9,20 +13,21 @@ const Contacts = ({ setContacts }) => {
     email: "",
     phone: "",
   });
-  // ============ change Function ============
+
+  // ============ Change Handler ============
   const changeHandler = (event) => {
     const { name, value } = event.target;
     setContact((contact) => ({ ...contact, [name]: value }));
   };
 
-  // ============ submit Function ============
+  // ============ Submit Handler ============
   const submitHandler = () => {
     if (Object.values(contact).some((value) => !value.trim())) {
       toast.error("Please enter valid Data!");
       return;
     }
     setContacts((contacts) => [...contacts, contact]);
-    setContact({ name: "" });
+    setContact({ name: "", lastname: "", email: "", phone: "" });
   };
 
   // ============ Rendering ============
@@ -33,38 +38,16 @@ const Contacts = ({ setContacts }) => {
           Add a New Contact
         </h2>
         <form className="grid grid-cols-2 gap-4">
-          <input
-            name="name"
-            type="text"
-            placeholder="Name"
-            value={contact.name}
-            onChange={changeHandler}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-100"
-          />
-          <input
-            type="text"
-            name="lastname"
-            placeholder="Last Name"
-            value={contact.lastname}
-            onChange={changeHandler}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-100"
-          />
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={contact.email}
-            onChange={changeHandler}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-100"
-          />
-          <input
-            name="phone"
-            type="number"
-            placeholder="Phone"
-            value={contact.phone}
-            onChange={changeHandler}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-100"
-          />
+          {ContactList.map((field) => (
+            <InputField
+              key={field.name}
+              name={field.name}
+              type={field.type}
+              placeholder={field.placeholder}
+              value={contact[field.name]}
+              onChange={changeHandler}
+            />
+          ))}
           <button
             type="button"
             onClick={submitHandler}
@@ -76,6 +59,10 @@ const Contacts = ({ setContacts }) => {
       </div>
     </div>
   );
+};
+
+Contacts.propTypes = {
+  setContacts: PropTypes.func.isRequired,
 };
 
 export default Contacts;

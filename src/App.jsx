@@ -7,6 +7,7 @@ import Contacts from "./components/modules/Contacts";
 const App = () => {
   // ============ State ==============
   const [contacts, setContacts] = useState([]);
+  console.log(contacts);
 
   // ============ Rendering ==============
   return (
