@@ -11,22 +11,30 @@ const List = () => {
 
   // ============== Rendering =============
   return (
-    <ul>
+    <ul className="space-y-4">
       {contacts.map((contact) => (
-        <li key={v4()}>
-          <p>
-            {contact.name} {contact.lastname}
-          </p>
-          <p>
-            <SiMinutemailer />
-            {contact.email}
-          </p>
-          <p>
-            <FaPhoneAlt />
-            {contact.phone}
-          </p>
-          <button onClick={() => deleteContact(contact.id)}>
-            <MdDeleteOutline />
+        <li
+          key={v4()}
+          className="flex justify-between items-center bg-gray-50 border rounded-lg p-4 shadow hover:shadow-lg"
+        >
+          <div>
+            <p className="text-lg font-semibold text-gray-700">
+              {contact.name} {contact.lastname}
+            </p>
+            <p className="text-sm text-gray-600 flex items-center">
+              <SiMinutemailer className="mr-2 text-blue-500" />
+              {contact.email}
+            </p>
+            <p className="text-sm text-gray-600 flex items-center">
+              <FaPhoneAlt className="mr-2 text-green-500" />
+              {contact.phone}
+            </p>
+          </div>
+          <button
+            onClick={() => deleteContact(contact.id)}
+            className="text-red-300 hover:text-red-700"
+          >
+            <MdDeleteOutline size={24} />
           </button>
         </li>
       ))}

@@ -1,6 +1,7 @@
-import List from "./List";
-import { useContext } from "react";
 import { ContactContext } from "../../context/ContactProvider";
+import { useContext } from "react";
+
+import List from "./List";
 
 const ContactList = () => {
   // ============== Context =============
@@ -9,11 +10,11 @@ const ContactList = () => {
   // ============== Rendering =============
   return (
     <div>
-      <h3>Contacts List</h3>
+      <h3 className="text-2xl font-bold text-gray-700 mb-4">Contacts List</h3>
       {contacts.length ? (
         <List contacts={contacts} />
       ) : (
-        <h1>No Contact Added!</h1>
+        <h1 className="text-gray-500 text-center">No Contact Added!</h1>
       )}
     </div>
   );
