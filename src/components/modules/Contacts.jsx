@@ -1,5 +1,6 @@
-import { ContactList } from "../../utils/ContactList";
+import { InputsList } from "../../utils/InputsList";
 import { useState } from "react";
+import { v4 } from "uuid";
 
 import InputField from "../elements/InputField";
 import PropTypes from "prop-types";
@@ -8,6 +9,7 @@ import toast from "react-hot-toast";
 const Contacts = ({ setContacts }) => {
   // ============ State ============
   const [contact, setContact] = useState({
+    id: "",
     name: "",
     lastname: "",
     email: "",
@@ -22,12 +24,18 @@ const Contacts = ({ setContacts }) => {
 
   // ============ Submit Handler ============
   const submitHandler = () => {
-    if (Object.values(contact).some((value) => !value.trim())) {
+    if (
+      !contact.name ||
+      !contact.lastname ||
+      !contact.email ||
+      !contact.phone
+    ) {
       toast.error("Please enter valid Data!");
       return;
     }
-    setContacts((contacts) => [...contacts, contact]);
-    setContact({ name: "", lastname: "", email: "", phone: "" });
+    const newContact = { ...contact, id: v4() };
+    setContacts((contacts) => [...contacts, newContact]);
+    setContact({ id: "", name: "", lastname: "", email: "", phone: "" });
   };
 
   // ============ Rendering ============
@@ -38,9 +46,9 @@ const Contacts = ({ setContacts }) => {
           Add a New Contact
         </h2>
         <form className="grid grid-cols-2 gap-4">
-          {ContactList.map((field) => (
+          {InputsList.map((field) => (
             <InputField
-              key={field.name}
+              key={v4()}
               name={field.name}
               type={field.type}
               placeholder={field.placeholder}
